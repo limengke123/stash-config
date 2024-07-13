@@ -1,10 +1,10 @@
-#!name = YouTube去广告22
-#!desc =支持pip，后台播放22
-#!author = Maasea
+#!name = AppleTV专用
+#!desc = 去掉一些没用的
+#!author = Li
 #!homepage=https://whatshub.top
 #!icon = https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/YouTube.png
-name: YouTubequguanggao
-desc: 支持pip，后台播放
+name: YouTubeAD_APTV
+desc: 去掉一些没用的
 http:
   script:
     - match: ^https?:\/\/youtubei\.googleapis\.com\/youtubei\/v1\/(browse|next|player|search|reel\/reel_watch_sequence|guide|account\/get_setting|get_watch)
