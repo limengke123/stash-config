@@ -7,4 +7,4 @@ name: YouTubeAD_APTV
 desc: 去掉一些没用的
 http:
   rewrite:
-    - /^https?:\/\/[\w-]+\.googlevideo\.com\/videoplayback/ - reject-403
+    - /^https?:\/\/[\w-]+\.googlevideo\.com\/videoplayback/ - reject
