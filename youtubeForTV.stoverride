@@ -8,3 +8,5 @@ desc: 去掉一些没用的
 http:
   rewrite:
     - /^https?:\/\/[\w-]+\.googlevideo\.com\/videoplayback/ - reject
+    - ^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads - reject-200
+    - ^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) - reject-200
