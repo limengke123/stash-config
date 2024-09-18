@@ -10,3 +10,4 @@ http:
     - /^https?:\/\/[\w-]+\.googlevideo\.com\/videoplayback/ - reject
     - ^https?:\/\/(www|s)\.youtube\.com\/api\/stats\/ads - reject-200
     - ^https?:\/\/(www|s)\.youtube\.com\/(pagead|ptracking) - reject-200
+    - ^https?:\/\/s\.youtube\.com\/api\/stats\/qoe\?adcontext - reject-200
