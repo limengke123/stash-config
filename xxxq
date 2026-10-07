@@ -1,0 +1,18 @@
+#!desc=xxxq解锁会员
+#!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/xxyq.png
+#!author=lutqhysky
+name: xxxq
+desc: xxxq解锁会员
+http:
+  mitm:
+    - "prod.ukids.cn"
+  script:
+    - match: ^https?:\/\/prod\.ukids\.cn\/uch5\/getUser
+      name: xxxq
+      type: response
+      require-body: true
+      timeout: 10
+script-providers:
+  xxxq:
+    url: https://raw.githubusercontent.com/limengke123/stash-config/refs/heads/main/xxyy.js
+    interval: 86400
