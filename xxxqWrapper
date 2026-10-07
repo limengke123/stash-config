@@ -1,13 +1,13 @@
 #!desc=xxxq解锁会员
 #!icon=https://raw.githubusercontent.com/deezertidal/private/main/icons/xxyq.png
-#!author=lutqhysky
+#!author=brady
 name: xxxq
 desc: xxxq解锁会员
 http:
   mitm:
-    - "prod.ukids.cn"
+    - "fastapi.ukids.cn"
   script:
-    - match: ^https?:\/\/prod\.ukids\.cn\/uch5\/getUser
+    - match: ^https?:\/\/fastapi\.ukids\.cn\/ucapp\/sync
       name: xxxq
       type: response
       require-body: true
