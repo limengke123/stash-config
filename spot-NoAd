@@ -1,68 +1,79 @@
 #!name=Spotify去广告
-#!desc=Spotify去广告加部分解锁会员功能,音质不能设置为超高v1
+#!desc=Spotify去广告加部分解锁会员功能,音质不能设置为超高
 #!icon=https://img.icons8.com/?size=100&id=ZuQiaFCa1vXe&format=png&color=000000
 #!date=260426
 
 name: Spotify去广告
 desc: Spotify去广告加部分解锁会员功能,音质不能设置为超高
 
+rules:
+  - AND,((DOMAIN-SUFFIX,spotify.com),(PROTOCOL,QUIC)),REJECT
+  - DOMAIN,aet.spotify.com,REJECT
+
 http:
-mitm:
-- ‘spclient.wg.spotify.com’
-- ‘*spclient.spotify.com’
+  mitm:
+    - spclient.wg.spotify.com
+    - '*spclient.spotify.com'
 
-script:
-# 部分解锁会员功能
-- match: ‘^https://(spclient.wg.spotify.com|.*-spclient.spotify.com(:443)?)/gabo-receiver-service’
-name: spotify-gabo
-type: request
-timeout: 10
+  header-rewrite:
+    - '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/user-customization-service\/v1\/customize$ request-del If-None-Match'
 
-- match: '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$'
-  name: spotify-proto-ev3
-  type: response
-  require-body: true
-  binary-mode: true
-  timeout: 10
-# 去除搜索广告
-- match: '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/browsita\/v.\/browse'
-  name: spotify-no-search-ad
-  type: response
-  require-body: true
-  binary-mode: true
-  timeout: 10
-# 去除首页广告
-- match: '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/casita\/v.\/home\/default'
-  name: spotify-no-home-ad
-  type: response
-  require-body: true
-  binary-mode: true
-  timeout: 10
-# 去除滚动内容广告
-- match: '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/scrollsita\/v.\/scroll\/spotify'
-  name: spotify-no-scroll-ad
-  type: response
-  require-body: true
-  binary-mode: true
-  timeout: 10
+  url-rewrite:
+    - '^https:\/\/(spclient\.wg|.*-spclient)\.spotify\.com(:443)?\/pendragon - reject'
+    - '^https:\/\/.*-spclient\.spotify\.com(:443)?\/pam-view-service\/ - reject'
+    - '^https:\/\/.*37i9dQZF1EYkqdzj48dyYq - reject'
+
+  script:
+    - match: '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/gabo-receiver-service'
+      name: spotify-gabo
+      type: request
+      timeout: 10
+
+    - match: '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/(bootstrap\/v1\/bootstrap|user-customization-service\/v1\/customize)$'
+      name: spotify-proto-ev3
+      type: response
+      require-body: true
+      binary-mode: true
+      timeout: 10
+
+    - match: '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/browsita\/v.\/browse'
+      name: spotify-no-search-ad
+      type: response
+      require-body: true
+      binary-mode: true
+      timeout: 10
+
+    - match: '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/casita\/v.\/home\/default'
+      name: spotify-no-home-ad
+      type: response
+      require-body: true
+      binary-mode: true
+      timeout: 10
+
+    - match: '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/scrollsita\/v.\/scroll\/spotify'
+      name: spotify-no-scroll-ad
+      type: response
+      require-body: true
+      binary-mode: true
+      timeout: 10
 
 script-providers:
-spotify-gabo:
-url: https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-gabo.js
-interval: 86400
+  spotify-gabo:
+    url: https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-gabo.js
+    interval: 86400
 
-spotify-proto-ev3:
-url: https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-proto-ev3.js
-interval: 86400
+  spotify-proto-ev3:
+    url: https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-proto-ev3.js
+    interval: 86400
 
-spotify-no-search-ad:
-url: https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-NoSearchAd.js
-interval: 86400
+  spotify-no-search-ad:
+    url: https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-NoSearchAd.js
+    interval: 86400
 
-spotify-no-home-ad:
-url: https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-NoHomeAd.js
-interval: 86400
+  spotify-no-home-ad:
+    url: https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-NoHomeAd.js
+    interval: 86400
 
-spotify-no-scroll-ad:
-url: https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-NoScrollAd.js
-interval: 86400
+  spotify-no-scroll-ad:
+    url: https://raw.githubusercontent.com/Amlabort/MY_clash/refs/heads/main/files/lpx/js/spot-NoScrollAd.js
+    interval: 86400
