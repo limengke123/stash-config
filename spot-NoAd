@@ -8,7 +8,7 @@ desc: Spotify去广告加部分解锁会员功能,音质不能设置为超高
 
 http:
 mitm:
-- spclient.wg.spotify.com
+- ‘spclient.wg.spotify.com’
 - ‘*spclient.spotify.com’
 
 script:
@@ -24,7 +24,6 @@ timeout: 10
   require-body: true
   binary-mode: true
   timeout: 10
-
 # 去除搜索广告
 - match: '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/browsita\/v.\/browse'
   name: spotify-no-search-ad
@@ -32,7 +31,6 @@ timeout: 10
   require-body: true
   binary-mode: true
   timeout: 10
-
 # 去除首页广告
 - match: '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/casita\/v.\/home\/default'
   name: spotify-no-home-ad
@@ -40,7 +38,6 @@ timeout: 10
   require-body: true
   binary-mode: true
   timeout: 10
-
 # 去除滚动内容广告
 - match: '^https:\/\/(spclient\.wg\.spotify\.com|.*-spclient\.spotify\.com(:443)?)\/scrollsita\/v.\/scroll\/spotify'
   name: spotify-no-scroll-ad
